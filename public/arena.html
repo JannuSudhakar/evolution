@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Arena</title>
+    <style media="screen">
+      h1{
+        font-family: cursive;
+        font-size: 5rem;
+        text-align: center;
+        margin: 100px;
+      }
+      img{
+        height: 256px;
+        width: 256px;
+        border: 1px solid black;
+        cursor: pointer;
+      }
+      .ring{
+        display: flex;
+        justify-content: space-evenly;
+      }
+      p{
+        margin: 100px;
+        text-align: center;
+        font-family: sans;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pick One</h1>
+    <div class="ring">
+      <img src="text5336.png" alt="waiting" id="img1">
+      <img src="text5336.png" alt="waiting" id="img2">
+    </div>
+    <p>This website uses javascript to work (If you have it disabled you can't do anything here)</p>
+  </body>
+  <script>
+    function imgclickfuncgen(winner,uid){
+      return function(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+          if(this.readyState == 4 && this.status == 200){
+            console.log("ppp");
+            newBattle();
+            console.log("qqq");
+          }
+        }
+        url = `/battleresult?uid=${uid}&winner=${winner}`;
+        xhttp.open("POST",url,true);
+        xhttp.send();
+      }
+    }
+    function newBattle(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+             response = xhttp.responseText.split(" ");
+             document.getElementById("img1").src = response[0]+".png";
+             document.getElementById("img1").alt = "image1";
+             document.getElementById("img2").src = response[1]+".png";
+             document.getElementById("img2").alt = "image2";
+             var uid = response[2];
+             document.getElementById("img1").onclick = imgclickfuncgen(0,uid);
+             document.getElementById("img2").onclick = imgclickfuncgen(1,uid);
+          }
+      };
+      xhttp.open("POST", "/newbattle", true);
+      xhttp.send();
+    }
+    window.onload = function(){
+      newBattle();
+    }
+  </script>
+</html>
