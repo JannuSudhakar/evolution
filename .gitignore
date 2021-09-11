@@ -262,3 +262,4 @@ cython_debug/
 public/dump/*.organism
 public/dump/*.png
 public/dump/*.trackdump
+public/dump/*.json
