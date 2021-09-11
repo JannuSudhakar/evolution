@@ -52,4 +52,18 @@ app.post("/battleresult",function(req,res){
   return;
 })
 
+function clearIdle(){
+  const keys = Object.keys(uidmap);
+  const timenow = new Date();
+  for(i = 0; i < keys.length; i++){
+    if(timenow - uidmap[keys[i]].timeofreq > 100000){
+      //console.log('wer')
+      delete uidmap[keys[i]];
+    }
+  }
+  //console.log(uidmap)
+}
+
+setInterval(clearIdle,30000);
+
 app.listen(7989);
