@@ -14,7 +14,7 @@ battlehandler.stdout.on('data',function(data){
   console.log(data.toString());
 })
 
-app.post("/newbattle",function(req,res){
+app.get("/newbattle",function(req,res){
   fs.readFile(__dirname+"/public/dump/zhewarudo.json",function(err,jsonString){
     if(err){
       console.log(`File read failed at ${new Date}`);

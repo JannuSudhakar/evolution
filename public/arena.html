@@ -41,12 +41,10 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function(){
           if(this.readyState == 4 && this.status == 200){
-            console.log("ppp");
             newBattle();
-            console.log("qqq");
           }
         }
-        url = `/battleresult?uid=${uid}&winner=${winner}`;
+        url = `battleresult?uid=${uid}&winner=${winner}`;
         xhttp.open("POST",url,true);
         xhttp.send();
       }
@@ -65,7 +63,7 @@
              document.getElementById("img2").onclick = imgclickfuncgen(1,uid);
           }
       };
-      xhttp.open("POST", "/newbattle", true);
+      xhttp.open("GET", "newbattle", true);
       xhttp.send();
     }
     window.onload = function(){
